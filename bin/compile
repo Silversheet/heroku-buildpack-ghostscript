@@ -13,11 +13,21 @@ arrow() {
   sed -u 's/^/-----> /'
 }
 
-GS_VERSION_SEMVER="9.50"
-GS_VERSION="950"
+if [ -f $ENV_DIR/GS_VERSION_SEMVER ]; then
+  semver=$(cat $ENV_DIR/GS_VERSION_SEMVER)
+else
+  semver="9.50"
+fi
+
+if [ -f $ENV_DIR/GS_VERSION ]; then
+  version=$(cat $ENV_DIR/GS_VERSION)
+else
+  version="950"
+fi
+
 echo "Installing Ghostscript $GS_VERSION_SEMVER using build directory $1" | arrow
 
-PACKAGE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs$GS_VERSION/ghostscript-$GS_VERSION_SEMVER-linux-x86_64.tgz"
+PACKAGE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs$version/ghostscript-$semver-linux-x86_64.tgz"
 
 GS_VENDOR="$BUILD_DIR/vendor/ghostscript"
 rm -rf $GS_VENDOR/*
@@ -31,7 +41,7 @@ echo "Fetching ghostscript binaries" | indent
 curl $PACKAGE -L -o - | tar xzf - -C $GS_SOURCE_DIR 2>&1 | indent
 
 # Extracted binary lives here
-GS_SOURCE_BINARY="$GS_SOURCE_DIR/ghostscript-$GS_VERSION_SEMVER-linux-x86_64/gs-$GS_VERSION-linux-x86_64"
+GS_SOURCE_BINARY="$GS_SOURCE_DIR/ghostscript-$semver-linux-x86_64/gs-$version-linux-x86_64"
 mv $GS_SOURCE_BINARY $GS_VENDOR/bin/gs
 
 # Don't keep anything around

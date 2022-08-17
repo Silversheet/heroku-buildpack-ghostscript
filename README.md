@@ -1,11 +1,11 @@
 # Heroku Buildpack for Ghostscript
 
-Installs Ghostscript 9.50 on Heroku
+Installs Ghostscript 9.50 (default) or a custom version defined in Heroku ENV on Heroku
 
 ## Install
 
     $ cd /path/to/your-app
-    $ heroku buildpacks:add https://github.com/sdglhm/heroku-buildpack-ghostscript.git
+    $ heroku buildpacks:add https://github.com/Silversheet/heroku-buildpack-ghostscript
     
     # Push changes to deploy
     $ git push
