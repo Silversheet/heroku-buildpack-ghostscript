@@ -16,13 +16,13 @@ arrow() {
 if [ -f $ENV_DIR/GS_VERSION_SEMVER ]; then
   semver=$(cat $ENV_DIR/GS_VERSION_SEMVER)
 else
-  semver="9.50"
+  semver="9.56.1"
 fi
 
 if [ -f $ENV_DIR/GS_VERSION ]; then
   version=$(cat $ENV_DIR/GS_VERSION)
 else
-  version="950"
+  version="9561"
 fi
 
 echo "Installing Ghostscript $GS_VERSION_SEMVER using build directory $1" | arrow
